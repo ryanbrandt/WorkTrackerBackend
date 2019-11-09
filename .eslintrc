@@ -1,0 +1,14 @@
+{
+  "extends": ["prettier"],
+  "parser": "babel-eslint",
+  "rules": {
+    "func-names": ["error", "never"],
+    "no-underscore-dangle": "off",
+    "linebreak-style": "off",
+    "object-curly-spacing": 2,
+    "curly": ["error", "multi-line"],
+    "comma-dangle": ["error", "always-multiline"],
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0
+  }
+}
