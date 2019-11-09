@@ -4,11 +4,15 @@ module.exports = class Db {
   static getConnection() {
     const connection = mysql.createConnection({
       host: process.env.WORK_TRACKER_DB_HOST,
+      port: 3306,
       user: process.env.WORK_TRACKER_DB_USER,
-      passwod: process.env.WORK_TRACKER_DB_SECRET,
-      database: "work_tracker",
+      password: process.env.WORK_TRACKER_DB_SECRET,
+      database: "worktracker",
     });
-    connection.connect();
+    connection.connect(err => {
+      if (err) console.log(`Database connection error: ${err}`);
+      else console.log("Database connection establish");
+    });
     return connection;
   }
 

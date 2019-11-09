@@ -1,11 +1,13 @@
 {
   "name": "WorkTrackerBackend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "amazon-cognito-identity-js": "^3.2.0",
     "apisauce": "^1.1.1",
     "aws-sdk": "^2.568.0",
     "babel-eslint": "^10.0.3",
+    "db-migrate": "^0.11.6",
+    "db-migrate-mysql": "^1.1.10",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "jest": "^24.9.0",
@@ -14,6 +16,15 @@
     "react-native-cli": "^2.0.1",
     "serverless-jest-plugin": "^0.2.1",
     "serverless-offline": "^5.12.0",
+    "serverless-plugin-stage-variables": "^1.9.5",
+    "serverless-plugin-warmup": "^4.7.1-rc.1",
     "uuid": "^3.3.3"
+  },
+  "scripts": {
+    "test": "jest test",
+    "migrate": "db-migrate"
+  },
+  "jest": {
+    "verbose": false
   }
 }

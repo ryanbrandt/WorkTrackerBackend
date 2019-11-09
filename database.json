@@ -1,0 +1,12 @@
+{
+  "defaultEnv": "development",
+  "development": {
+    "host": { "ENV": "WORK_TRACKER_DB_HOST" },
+    "port": 3306,
+    "database": "worktracker",
+    "driver": "mysql",
+    "user": { "ENV": "WORK_TRACKER_DB_USER" },
+    "password": { "ENV": "WORK_TRACKER_DB_SECRET" },
+    "multipleStatements": true
+  }
+}
