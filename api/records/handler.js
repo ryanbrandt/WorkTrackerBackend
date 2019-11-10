@@ -2,12 +2,40 @@
 const Db = require("../../utils/db");
 const mysql = require("mysql");
 
-async function byUser(event, context) {}
+async function byUser(event, context) {
+  if (event.source === "serverless-plugin-warmup") {
+    return "Lambda is warm!";
+  }
+}
 
-async function byCompany(event, context) {}
+async function byCompany(event, context) {
+  if (event.source === "serverless-plugin-warmup") {
+    return "Lambda is warm!";
+  }
+}
 
-async function createRecord(event, context) {}
+async function create(event, context) {
+  if (event.source === "serverless-plugin-warmup") {
+    return "Lambda is warm!";
+  }
+}
 
-async function deleteRecord(event, context) {}
+async function deleteRecord(event, context) {
+  if (event.source === "serverless-plugin-warmup") {
+    return "Lambda is warm!";
+  }
+}
 
-async function updateRecord(event, context) {}
+async function update(event, context) {
+  if (event.source === "serverless-plugin-warmup") {
+    return "Lambda is warm!";
+  }
+}
+
+module.exports = {
+  byUser: byUser,
+  byCompany: byCompany,
+  create: create,
+  delete: deleteRecord,
+  update: update,
+};
