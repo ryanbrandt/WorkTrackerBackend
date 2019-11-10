@@ -10,9 +10,8 @@ async function addToCompany(event, context) {
     return "Lambda is warm!";
   }
 
-  const { queryStringParameters, pathParameters } = event;
-  const { userId } = pathParameters;
-  const { companyId } = queryStringParameters;
+  const { body } = event;
+  const { userId, companyId } = body;
 
   if (!helpers.isValidUUIDs([userId, companyId])) {
     return Response.basic(400, "Invalid UUIDs provided");

@@ -58,11 +58,11 @@ functions:
       - http:
           method: post
           cors: true
-          path: /users/{userId}
+          path: /users
         request:
-          parameters:
-            querystrings:
-              companyId: true
+          body:
+            user: true
+            company: true 
   recordsByUser:
     handler: api/records/handler.byUser
     warmup: true
@@ -83,7 +83,6 @@ functions:
         method: get
         cors: true
         path: /records/{companyId}
-  # TODO add schema model
   createRecord:
     handler: api/records/handler.create
     warmup: true
@@ -92,7 +91,13 @@ functions:
         method: post
         cors: true
         path: /records
-      # schema here
+        request:
+          body:
+            user: true 
+            activity: true 
+            company: false
+            startTime: true 
+            endTime: true
   updateRecord:
     handler: api/records/handler.create
     warmup: true
@@ -100,8 +105,13 @@ functions:
       - http:
         method: put
         cors: true
-        path: /records
-      # schema here
+        path: /records/{recordId}
+        request:
+          body:
+            activity: true 
+            company: false
+            startTime: true
+            endTime: true 
   deleteRecord:
     handler: api/records/handler.deleteRecord
     warmup: true
@@ -109,11 +119,7 @@ functions:
       - http:
         method: delete
         cors: true
-        path: /records
-        request:
-          parameters:
-            querystrings:
-              recordId: true
+        path: /records/{recordId}
   listCompanies:
     handler: api/companies/handler.list
     warmup: true
@@ -122,7 +128,6 @@ functions:
         method: get
         cors: true
         path: /companies
-  # TODO add schema model
   createCompany:
     handler: api/companies/handler.create
     warmup: true
@@ -131,7 +136,10 @@ functions:
         mthod: post
         cors: true
         path: /companies
-        # schema here
+        request:
+          body:
+            name: true
+            logoUri: false
   listActivities:
     handler: api/activities/handler.list
     warmup: true
@@ -155,11 +163,12 @@ functions:
         method: get
         cors: true
         path: /activities/{companyId}
-    # TODO add schema model
     createActivity:
       handler: api/activities/handler.create
       - http: 
         method: post
         cors: true
         path: /activities
-        # schema here
+        request:
+          body: 
+            name: true
