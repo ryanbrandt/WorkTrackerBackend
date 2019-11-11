@@ -65,7 +65,7 @@ async function create(event, context) {
     const insertResults = await Db.query(db, insertSql);
 
     if (insertResults.affectedRows) {
-      payload = Response.basic(200, "Company successfully added");
+      payload = Response.basic(201, "Company successfully added");
     } else {
       payload = Response.basic(400, "Company insert failed");
     }

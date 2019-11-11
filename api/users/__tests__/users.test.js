@@ -6,7 +6,8 @@ const api = apisauce.create({
   baseURL: `${process.env.WT_BACKEND_URL}`,
 });
 
-test("POST /users/{userId} adds a user to a company", async done => {
+// need companies first
+test.skip("POST /users/{userId} adds a user to a company", async done => {
   const payload = {
     userId: "todo",
     companyId: "todo",

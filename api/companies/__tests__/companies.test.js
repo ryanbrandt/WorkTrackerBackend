@@ -41,7 +41,7 @@ test("POST /companies creates a new company", async done => {
   };
 
   const { status } = await api.post("/companies", payload);
-  expect(status).toBe(200);
+  expect(status).toBe(201);
 
   const db = Db.getConnection();
   const verificationSql = `

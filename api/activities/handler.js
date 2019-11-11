@@ -145,6 +145,41 @@ async function create(event, context) {
   if (event.source === "serverless-plugin-warmup") {
     return "Lambda is warm!";
   }
+
+  const { body } = event;
+  const { id, name } = JSON.parse(body);
+
+  const insertSql = `
+    INSERT INTO activities(
+      id,
+      name
+    )
+    VALUES(
+      UUID_TO_BIN(${mysql.escape(id)}),
+      ${name}
+    );
+  `;
+
+  const db = Db.getConnection();
+  let payload;
+  try {
+    const results = await Db.query(db, insertSql);
+
+    if (results.affectedRows) {
+      payload = Response.basic(201, "Activity successfully created");
+    } else {
+      payload = Response.basic(400, "Failed to create new activity");
+    }
+  } catch (e) {
+    payload = Response.basic(
+      500,
+      `An error occurred during activity insert ${e}`
+    );
+  } finally {
+    db.destroy();
+  }
+
+  return payload;
 }
 
 module.exports = {
