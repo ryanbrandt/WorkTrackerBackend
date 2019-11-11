@@ -13,4 +13,17 @@ module.exports = class Response {
     };
     return response;
   }
+
+  static withPayload(code, data) {
+    const response = {
+      isBase64Encoded: false,
+      statusCode: code,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
+      body: JSON.stringify(data),
+    };
+    return response;
+  }
 };

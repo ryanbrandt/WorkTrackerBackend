@@ -1,6 +1,7 @@
 "use strict";
 
 const Db = require("../../utils/db");
+const Response = require("../../utils/response");
 const mysql = require("mysql");
 
 async function list(event, context) {
@@ -19,7 +20,7 @@ async function list(event, context) {
     const results = await Db.query(db, selectSql);
 
     if (results.length) {
-      payload = Response.basic(200, results);
+      payload = Response.withPayload(200, results);
     } else {
       payload = Response.basic(404, "No companies currently exist in DB");
     }
@@ -41,15 +42,17 @@ async function create(event, context) {
   }
 
   const { body } = event;
-  const { name, logoUri = null, industry = null } = body;
+  const { id, name, logoUri, industry } = JSON.parse(body);
 
   const insertSql = `
     INSERT INTO companies(
+      id,
       name,
-      logoUri,
+      logo_uri,
       industry
     )
     VALUES(
+      UUID_TO_BIN(${mysql.escape(id)}),
       ${mysql.escape(name)},
       ${mysql.escape(logoUri)},
       ${mysql.escape(industry)}

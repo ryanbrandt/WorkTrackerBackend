@@ -11,12 +11,13 @@ module.exports = class Db {
     });
     connection.connect(err => {
       if (err) console.log(`Database connection error: ${err}`);
-      else console.log("Database connection establish");
+      else console.log("Database connection established");
     });
     return connection;
   }
 
   static query(db, sql) {
+    console.log(sql);
     return new Promise((resolve, reject) => {
       db.query(sql, (error, results) => {
         if (error) {

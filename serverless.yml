@@ -62,7 +62,7 @@ functions:
         request:
           body:
             user: true
-            company: true 
+            company: true
   recordsByUser:
     handler: api/records/handler.byUser
     warmup: true
@@ -80,95 +80,100 @@ functions:
     warmup: true
     events:
       - http:
-        method: get
-        cors: true
-        path: /records/{companyId}
+          method: get
+          cors: true
+          path: /records/{companyId}
   createRecord:
     handler: api/records/handler.create
     warmup: true
     events:
       - http:
-        method: post
-        cors: true
-        path: /records
-        request:
-          body:
-            user: true 
-            activity: true 
-            company: false
-            startTime: true 
-            endTime: true
+          method: post
+          cors: true
+          path: /records
+          request:
+            body:
+              id: true
+              user: true
+              activity: true
+              company: false
+              startTime: true
+              endTime: true
   updateRecord:
     handler: api/records/handler.create
     warmup: true
     events:
       - http:
-        method: put
-        cors: true
-        path: /records/{recordId}
-        request:
-          body:
-            activity: true 
-            company: false
-            startTime: true
-            endTime: true 
+          method: put
+          cors: true
+          path: /records/{recordId}
+          request:
+            body:
+              id: true
+              activity: true
+              company: false
+              startTime: true
+              endTime: true
   deleteRecord:
     handler: api/records/handler.deleteRecord
     warmup: true
     events:
       - http:
-        method: delete
-        cors: true
-        path: /records/{recordId}
+          method: delete
+          cors: true
+          path: /records/{recordId}
   listCompanies:
     handler: api/companies/handler.list
     warmup: true
     events:
       - http:
-        method: get
-        cors: true
-        path: /companies
+          method: get
+          cors: true
+          path: /companies
   createCompany:
     handler: api/companies/handler.create
     warmup: true
     events:
       - http:
-        mthod: post
-        cors: true
-        path: /companies
-        request:
-          body:
-            name: true
-            logoUri: false
+          method: post
+          cors: true
+          path: /companies
+          request:
+            body:
+              id: true
+              name: true
+              logoUri: false
   listActivities:
     handler: api/activities/handler.list
     warmup: true
-    events: 
-      - http:
-        method: get
-        cors: true 
-        path: /activities
-  activitiesByUser:
-    handler: api/activities/handler.byUser
-    warmup: true 
     events:
       - http:
-        method: get
-        cors: true 
-        path: /activities/{userId}
+          method: get
+          cors: true
+          path: /activities
+  activitiesByUser:
+    handler: api/activities/handler.byUser
+    warmup: true
+    events:
+      - http:
+          method: get
+          cors: true
+          path: /activities/{userId}
   activitiesByCompany:
     handler: api/activities/handler/byCompany
     events:
       - http:
-        method: get
-        cors: true
-        path: /activities/{companyId}
-    createActivity:
-      handler: api/activities/handler.create
-      - http: 
-        method: post
-        cors: true
-        path: /activities
-        request:
-          body: 
-            name: true
+          method: get
+          cors: true
+          path: /activities/company/{companyId}
+  createActivity:
+    handler: api/activities/handler.create
+    events:
+      - http:
+          method: post
+          cors: true
+          path: /activities
+          request:
+            body:
+              id: true
+              name: true
